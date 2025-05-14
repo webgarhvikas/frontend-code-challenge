@@ -18,7 +18,9 @@
           <div class="rv-products-box">
             <img src="{{ product.images.first | image_url }}" alt="{{ product.title }}">
             <div class="rv-products-box-info">
-             <a href="{{  product.url }}"> <h3>{{ product.title }}</h3> </a>
+              <a href="{{  product.url }}">
+                <h3>{{ product.title }}</h3>
+              </a>
               <div class="product-description">{{ product.description }}</div>
               <div class="rv-main-price">$ {{ product.price }}</div>
               <button>Add to cart</button>
@@ -32,16 +34,14 @@
     <div class="swiper-scrollbar"></div>
   </div>
 
-<div class="swiper-container rv-products" id="recently-viewed-products">
-  <div class="swiper-wrapper" id="recently-viewed-wrapper">
-    <!-- Recently viewed products will be injected here via JavaScript -->
+  <div class="swiper-container rv-products" id="recently-viewed-products">
+    <div class="swiper-wrapper" id="recently-viewed-wrapper">
+      <!-- Recently viewed products will be injected here via JavaScript -->
+    </div>
+
+    <!-- Progress bar (scrollbar) -->
+    <div class="swiper-scrollbar"></div>
   </div>
-
-  <!-- Progress bar (scrollbar) -->
-  <div class="swiper-scrollbar"></div>
-</div>
-
-
 </section>
 
 <script>
