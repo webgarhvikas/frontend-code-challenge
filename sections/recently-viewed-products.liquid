@@ -1,6 +1,56 @@
+
+
+<section class="rvp-main">
+
+        {% if section.settings.title != blank  %}
+             <h1 class="section-title">{{ section.settings.title }}</h1>
+        {% endif %}
+        
+       <span class="sub-title">{{ section.settings.sub_title }}</span>
+
+       <div class="rv-products">
+         
+       </div>
+
+  
+  
+</section>
+
+
+
+
+
+
+
+
 {% schema %}
   {
-    "name": "Section name",
-    "settings": []
+    "name": "Recently Viewed Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Title"
+      },
+       {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Section Sub Title"
+      },
+      {
+        "type": "header",
+        "content": "Recently Viewed"
+      },
+      {
+        "type": "text",
+        "id": "desktop_count",
+        "label": "Products on Desktop"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Recently Viewed Products"
+      }
+    ]
   }
 {% endschema %}
