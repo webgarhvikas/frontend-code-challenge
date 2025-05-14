@@ -14,7 +14,14 @@
 
          {% for products in section.settings.rv_products %}
 
-             {{ products | json }}
+             {{ products.title  }}
+
+             {{ products.description  }}
+
+
+
+             {{ products.selected_or_first_available_variant.image  }}
+         
          {% endfor %}
          
        </div>
