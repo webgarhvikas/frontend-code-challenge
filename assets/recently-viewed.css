@@ -7,3 +7,77 @@
     font-size: 37px;
     letter-spacing: normal;
 }
+.rvp-main .sub-title {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-top: 5px;
+}
+.rvp-main .rv-products {
+    margin-top: 30px;
+    overflow: hidden;
+    padding-bottom: 30px;
+    position: relative;
+}
+.rv-products-box > img {
+    max-width: 100%;
+}
+.rv-products-box {
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.rv-products-box .rv-products-box-info {
+    padding: 5px 15px 15px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.rv-products-box .rv-products-box-info h3, .rv-products-box .rv-products-box-info .rv-main-price {
+    margin-top: 0;
+    margin-bottom: 10px;
+    line-height: normal;
+    font-size: 17px;
+    letter-spacing: normal;
+    color: #000;
+}
+.rv-products-box-info .product-description, .rv-products-box-info .product-description p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-height: normal;
+    font-size: 14px;
+    margin: 0;
+}
+.rv-products-box .rv-products-box-info .rv-main-price {
+    margin-top: 10px;
+}
+.rv-products-box .rv-products-box-info button {
+    display: block;
+    background: #121212;
+    font-size: 14px;
+    text-align: center;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    width: 100%;
+    letter-spacing: normal;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+}
+.rv-products-box .rv-products-box-info button:hover {
+    background: #fff;
+    color: #121212;
+    box-shadow: inset 0 0 0 1px #121212;
+}
+.rv-products .swiper-scrollbar-drag {
+    display: block;
+    cursor: pointer;
+}
+.rvp-main .rv-products .swiper-scrollbar.swiper-scrollbar-horizontal {
+    height: 6px;
+}
+.rv-products .swiper-scrollbar-drag:hover {
+    background: #121212;
+}

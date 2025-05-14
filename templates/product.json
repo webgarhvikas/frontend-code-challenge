@@ -215,7 +215,7 @@
       "name": "Recently Viewed Products",
       "settings": {
         "title": "Recently Viewed Products",
-        "sub_title": "Lorem ipsum doller sit.",
+        "sub_title": "Products You've Seen",
         "rv_products": [
           "altorid-3",
           "black-leather-bag",
@@ -225,7 +225,9 @@
           "classic-varsity-top",
           "albert-2"
         ],
-        "desktop_count": ""
+        "desktop_count": "4",
+        "iPad_count": "3",
+        "mobile_count": "2"
       }
     },
     "related-products": {

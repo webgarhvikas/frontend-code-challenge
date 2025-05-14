@@ -1,7 +1,4 @@
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -10,19 +7,24 @@
   {% if section.settings.title != blank %}
     <h1 class="section-title">{{ section.settings.title }}</h1>
   {% endif %}
-
-  <span class="sub-title">{{ section.settings.sub_title }}</span>
+  
+  {% if section.settings.sub_title != blank %}
+  <div class="sub-title">{{ section.settings.sub_title }}</div>
+  {% endif %}
 
   <div class="swiper-container rv-products">
     <div class="swiper-wrapper">
       {% for product in section.settings.rv_products %}
         <div class="swiper-slide">
-          <img src="{{ product.images.first | image_url }}" alt="{{ product.title }}">
-          <h3>{{ product.title }}</h3>
-          <p>{{ product.description }}</p>
-          {% if product.selected_or_first_available_variant.image %}
-            <img src="{{ product.selected_or_first_available_variant.image | image_url }}" alt="">
-          {% endif %}
+          <div class="rv-products-box">
+            <img src="{{ product.images.first | image_url }}" alt="{{ product.title }}">
+            <div class="rv-products-box-info">
+              <h3>{{ product.title }}</h3>
+              <div class="product-description">{{ product.description }}</div>
+              <div class="rv-main-price">$ {{ product.price }}</div>
+              <button>Add to cart</button>
+            </div>
+          </div>
         </div>
       {% endfor %}
     </div>
@@ -37,7 +39,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     new Swiper(".swiper-container", {
       slidesPerView: 1,
-      spaceBetween: 20,
+      spaceBetween: 10,
       loop: false,
       scrollbar: {
         el: ".swiper-scrollbar",
@@ -45,10 +47,13 @@
       },
       breakpoints: {
         640: {
-          slidesPerView: 2,
+          slidesPerView: {{ section.settings.mobile_count }},
         },
         1024: {
-          slidesPerView: 3,
+          slidesPerView: {{ section.settings.iPad_count }},
+        },
+        1366: {
+          slidesPerView: {{ section.settings.desktop_count }},
         },
       },
     });
@@ -88,6 +93,16 @@
         "type": "text",
         "id": "desktop_count",
         "label": "Products on Desktop"
+      },
+      {
+        "type": "text",
+        "id": "iPad_count",
+        "label": "Products on iPad"
+      },
+      {
+        "type": "text",
+        "id": "mobile_count",
+        "label": "Products on Mobile"
       }
     ],
     "presets": [
