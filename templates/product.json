@@ -215,7 +215,7 @@
       "name": "Recently Viewed Products",
       "settings": {
         "title": "Recently Viewed Products",
-        "sub_title": "Lorem ipsum doller sit.",
+        "sub_title": "Products You've Seen",
         "rv_products": [
           "altorid-3",
           "black-leather-bag",
