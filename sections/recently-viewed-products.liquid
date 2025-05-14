@@ -41,7 +41,13 @@
       url: {{ product.url | json }}
     };
 
-    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+   
+    var viewed = [];
+    if (localStorage.getItem('recently_viewed') !== null) {
+     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+  }
+
+
     console.log('====viewed===',viewed)
 
     console.log('====viewed pp===',viewed.length)
