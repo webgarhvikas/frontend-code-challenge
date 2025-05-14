@@ -76,6 +76,8 @@
     display: block;
     cursor: pointer;
 }
-
+.rvp-main .rv-products .swiper-scrollbar.swiper-scrollbar-horizontal {
+    height: 6px;
+}
 
 
