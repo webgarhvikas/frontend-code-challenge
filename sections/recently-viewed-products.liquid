@@ -32,10 +32,15 @@
     <div class="swiper-scrollbar"></div>
   </div>
 
-  <div id="recently-viewed-products">
-  <h3>Recently Viewed</h3>
-  <div id="recently-viewed-container"></div>
+<div class="swiper-container rv-products" id="recently-viewed-products">
+  <div class="swiper-wrapper" id="recently-viewed-wrapper">
+    <!-- Recently viewed products will be injected here via JavaScript -->
+  </div>
+
+  <!-- Progress bar (scrollbar) -->
+  <div class="swiper-scrollbar"></div>
 </div>
+
 
 </section>
 
@@ -68,43 +73,64 @@
       document.addEventListener('DOMContentLoaded', function () {
     const maxItems = 5;
     const currentHandle = '{{ product.handle }}';
-    const productTitle = '{{ product.title }}';
-    const productImage = '{{ product.featured_image | img_url: "medium" }}';
-    const productUrl = '{{ product.url }}';
+    const productData = {
+      handle: currentHandle,
+      title: '{{ product.title | escape }}',
+      image: '{{ product.featured_image | image_url: "medium" }}',
+      description: `{{ product.description | strip_html | truncate: 100 | escape }}`,
+      price: '{{ product.price | money_without_currency }}',
+      url: '{{ product.url }}'
+    };
 
     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
 
-    // Remove if already in list
+    // Remove current if it exists
     viewed = viewed.filter(p => p.handle !== currentHandle);
 
-    // Add current product
-    viewed.unshift({
-      handle: currentHandle,
-      title: productTitle,
-      image: productImage,
-      url: productUrl
-    });
+    // Add current to beginning
+    viewed.unshift(productData);
 
-    // Limit to max items
+    // Limit number of items
     viewed = viewed.slice(0, maxItems);
 
-    // Save back to localStorage
+    // Store updated list
     localStorage.setItem('recently_viewed', JSON.stringify(viewed));
 
     // Render
-    const container = document.getElementById('recently-viewed-container');
-    if (container) {
+    const wrapper = document.getElementById('recently-viewed-wrapper');
+    if (wrapper) {
       viewed.forEach(product => {
         if (product.handle !== currentHandle) {
-          const html = `
-            <div class="recent-item">
-              <a href="${product.url}">
-                <img src="${product.image}" alt="${product.title}" style="max-width: 100px;" />
-                <p>${product.title}</p>
-              </a>
+          const slide = `
+            <div class="swiper-slide">
+              <div class="rv-products-box">
+                <a href="${product.url}">
+                  <img src="${product.image}" alt="${product.title}">
+                </a>
+                <div class="rv-products-box-info">
+                  <h3>${product.title}</h3>
+                  <div class="product-description">${product.description}</div>
+                  <div class="rv-main-price">$ ${product.price}</div>
+                  <button onclick="window.location.href='${product.url}'">View Product</button>
+                </div>
+              </div>
             </div>
           `;
-          container.insertAdjacentHTML('beforeend', html);
+          wrapper.insertAdjacentHTML('beforeend', slide);
+        }
+      });
+
+      // Initialize Swiper (if not already initialized)
+      new Swiper('.swiper-container.rv-products', {
+        slidesPerView: 2,
+        spaceBetween: 20,
+        scrollbar: {
+          el: '.swiper-scrollbar',
+          hide: false,
+        },
+        breakpoints: {
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
         }
       });
     }
