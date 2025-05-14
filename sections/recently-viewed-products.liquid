@@ -9,6 +9,8 @@
        <span class="sub-title">{{ section.settings.sub_title }}</span>
 
        <div class="rv-products">
+         
+{{  section.settings.rv_products  | json }}
 
          {% for products in section.settings.rv_products %}
 
