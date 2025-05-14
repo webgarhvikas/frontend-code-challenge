@@ -56,6 +56,9 @@
     // Limit to max items
     viewed = viewed.slice(0, maxItems);
 
+
+    console.log(viewed);
+
     // Update localStorage
     localStorage.setItem('recently_viewed', JSON.stringify(viewed));
 
