@@ -19,7 +19,7 @@
              {{ products.description  }}
 
 
-<img src="{{ products.selected_or_first_available_variant.image | image_url  }}">
+<img src="{{ products.images.first | image_url  }}">
              {{ products.selected_or_first_available_variant.image  }}
          
          {% endfor %}
