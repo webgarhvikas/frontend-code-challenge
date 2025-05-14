@@ -128,18 +128,26 @@
       });
 
       // Initialize Swiper (if not already initialized)
-      new Swiper('.swiper-container.rv-products', {
-        slidesPerView: 2,
-        spaceBetween: 20,
-        scrollbar: {
-          el: '.swiper-scrollbar',
-          hide: false,
+       new Swiper(".swiper-container", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      loop: false,
+      scrollbar: {
+        el: ".swiper-scrollbar",
+        draggable: true,
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: {{ section.settings.mobile_count }},
         },
-        breakpoints: {
-          768: { slidesPerView: 3 },
-          1024: { slidesPerView: 4 },
-        }
-      });
+        1024: {
+          slidesPerView: {{ section.settings.iPad_count }},
+        },
+        1366: {
+          slidesPerView: {{ section.settings.desktop_count }},
+        },
+      },
+    });
     }
   });
 </script>
