@@ -76,7 +76,7 @@
     const productData = {
       handle: {{ product.handle | json }},
       title: {{ product.title | json }},
-      image: {{ product.featured_image | image_url: '800x' | json }},
+      image: {{ product.featured_image | image_url: 'master' | json }},
       description: {{ product.description | strip_html | truncate: 100 | json }},
       price: {{ product.price | money_without_currency | json }},
       url: {{ product.url | json }}
