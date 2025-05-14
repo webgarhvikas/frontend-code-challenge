@@ -23,7 +23,7 @@
             <img src="{{ product.images.first | image_url }}" alt="{{ product.title }}">
             <div class="rv-products-box-info">
               <h3>{{ product.title }}</h3>
-              <p>{{ product.description }}</p>
+              <div class="product-description">{{ product.description }}</div>
               <div class="rv-main-price">{{ product.price }}</div>
               <button>Add to cart</button>
             </div>
