@@ -76,7 +76,7 @@
     const productData = {
       handle: currentHandle,
       title: '{{ product.title | escape }}',
-      image: '{{ product.featured_image | image_url: "medium" }}',
+      image: '{{ product.images.first | image_url: "medium" }}',
       description: `{{ product.description | strip_html | truncate: 100 | escape }}`,
       price: '{{ product.price | money_without_currency }}',
       url: '{{ product.url }}'
