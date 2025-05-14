@@ -43,10 +43,21 @@
 
    
     var viewed = [];
-    if (localStorage.getItem('recently_viewed') !== null) {
-     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+  //   if (localStorage.getItem('recently_viewed') !== null) {
+  //    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+  // }
+try {
+  const item = localStorage.getItem('recently_viewed');
+  if (item) {
+    viewed = JSON.parse(item);
+    if (!Array.isArray(viewed)) {
+      viewed = [];
+    }
   }
-
+} catch (e) {
+  console.error('Failed to parse recently_viewed from localStorage:', e);
+  viewed = [];
+}
 
     console.log('====viewed===',viewed)
 
