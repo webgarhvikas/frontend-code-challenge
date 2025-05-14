@@ -47,7 +47,9 @@
     font-size: 14px;
     margin: 0;
 }
-
+.rv-products-box .rv-products-box-info .rv-main-price {
+    margin-top: 10px;
+}
 
 
 
