@@ -9,6 +9,11 @@
        <span class="sub-title">{{ section.settings.sub_title }}</span>
 
        <div class="rv-products">
+
+         {% for products in section.settings.rv_products %}
+
+             {{ products }}
+         {% endfor %}
          
        </div>
 
