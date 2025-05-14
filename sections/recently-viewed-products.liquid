@@ -12,7 +12,7 @@
 
          {% for products in section.settings.rv_products %}
 
-             {{ products }}
+             {{ products | json }}
          {% endfor %}
          
        </div>
