@@ -32,52 +32,11 @@
     <div class="swiper-scrollbar"></div>
   </div>
 
-  <recently-viewed-products
-    section-id="{{ section.id }}"
-    products-count="{{ settings.products_count_recently | escape }}"
-    {% if request.page_type == 'product' %}
-      exclude-product-id="{{ product.id | escape }}"
-    {% endif %}
-    class="section {% unless blends_with_background %}section--flush{% endunless %}"
-  >
-    {%- if request.page_type == 'search' and search.performed and search.results_count > 0 -%}
-      <div class="section__color-wrapper">
-        <div class="container {% unless blends_with_background %}vertical-breather{% endunless %}">
-          {%- if settings.title_recently != blank or section.settings.subheading_recently != blank -%}
-            <header class="section__header">
-              <div class="text-container">
-                {%- if settings.subheading_recently != blank -%}
-                  <h2 class="heading heading--small">{{ settings.subheading_recently }}</h2>
-                {%- endif -%}
+  <div id="recently-viewed-products">
+  <h3>Recently Viewed</h3>
+  <div id="recently-viewed-container"></div>
+</div>
 
-                {%- if settings.title_recently != blank -%}
-                  <h2 class="main-heading-all-tabs">{{ settings.title_recently }}</h2>
-                {%- endif -%}
-              </div>
-            </header>
-          {%- endif -%}
-
-          <product-list
-            {% if settings.stagger_products_apparition %}
-              stagger-apparition
-            {% endif %}
-            class="product-list product-list--center"
-          >
-            {%- assign smallest_image_aspect_ratio = 0 -%}
-
-            <div class="scroller">
-              <div class="product-list__inner product-list__inner--scroller hide-scrollbar">
-                {%- for product in search.results -%}
-                  {{ product.title }}
-                {% endfor %}
-              </div>
-            </div>
-          </product-list>
-        </div>
-      </div>
-    {% else %}
-    {%- endif -%}
-  </recently-viewed-products>
 </section>
 
 <script>
@@ -106,21 +65,50 @@
 
 
 
-        {%- if request.page_type == 'product' -%}
-      // We save the product ID in local storage to be eventually used for recently viewed section
-      try {
-        const items = JSON.parse(localStorage.getItem('theme:recently-viewed-products') || '[]');
+      document.addEventListener('DOMContentLoaded', function () {
+    const maxItems = 5;
+    const currentHandle = '{{ product.handle }}';
+    const productTitle = '{{ product.title }}';
+    const productImage = '{{ product.featured_image | img_url: "medium" }}';
+    const productUrl = '{{ product.url }}';
 
-        // We check if the current product already exists, and if it does not, we add it at the start
-        if (!items.includes({{ product.id | json }})) {
-          items.unshift({{ product.id | json }});
+    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+
+    // Remove if already in list
+    viewed = viewed.filter(p => p.handle !== currentHandle);
+
+    // Add current product
+    viewed.unshift({
+      handle: currentHandle,
+      title: productTitle,
+      image: productImage,
+      url: productUrl
+    });
+
+    // Limit to max items
+    viewed = viewed.slice(0, maxItems);
+
+    // Save back to localStorage
+    localStorage.setItem('recently_viewed', JSON.stringify(viewed));
+
+    // Render
+    const container = document.getElementById('recently-viewed-container');
+    if (container) {
+      viewed.forEach(product => {
+        if (product.handle !== currentHandle) {
+          const html = `
+            <div class="recent-item">
+              <a href="${product.url}">
+                <img src="${product.image}" alt="${product.title}" style="max-width: 100px;" />
+                <p>${product.title}</p>
+              </a>
+            </div>
+          `;
+          container.insertAdjacentHTML('beforeend', html);
         }
-
-        localStorage.setItem('theme:recently-viewed-products', JSON.stringify(items.slice(0, 20)));
-      } catch (e) {
-        // Safari in private mode does not allow setting item, we silently fail
-      }
-    {%- endif -%}
+      });
+    }
+  });
 </script>
 
 {% schema %}
