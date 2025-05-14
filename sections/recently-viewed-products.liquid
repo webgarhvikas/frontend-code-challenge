@@ -51,6 +51,10 @@
 
 
       document.addEventListener('DOMContentLoaded', function () {
+
+
+
+        const section = document.querySelector('.rvp-main');
     const maxItems = 10;
     const currentHandle = '{{ product.handle }}';
     const productData = {
@@ -72,6 +76,13 @@
         // return false;
 
     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+
+
+         // If no products in localStorage at all, hide the section and stop
+  if (viewed.length === 0 && section) {
+    section.style.display = 'none';
+    return;
+  }
 
     // Remove current if it exists
     viewed = viewed.filter(p => p.handle !== currentHandle);
