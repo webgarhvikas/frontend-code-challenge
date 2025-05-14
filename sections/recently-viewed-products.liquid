@@ -36,27 +36,10 @@
       url: {{ product.url | json }}
     };
 
-    // let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
+    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
 
-let viewedRaw = localStorage.getItem('recently_viewed');
-    console.log('Raw localStorage:', viewedRaw);
 
-let viewed = [];
-
-try {
-  viewed = JSON.parse(viewedRaw) || [];
-} catch (e) {
-  console.error('Invalid JSON in recently_viewed:', e);
-  viewed = [];
-}
-
-console.log('Parsed viewed:', viewed);
-
-if (!Array.isArray(viewed) || viewed.length === 0) {
-  console.log('No recently viewed items. Hiding section.');
-  if (section) section.style.display = 'none';
-  return;
-}
+    
 
     // 🔒 Hide section immediately if nothing in localStorage
     // if (viewed.length === 0) {
