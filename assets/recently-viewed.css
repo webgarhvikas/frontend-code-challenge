@@ -1,0 +1,9 @@
+.rvp-main {
+    margin-top: 50px;
+}
+.rvp-main h1.section-title {
+    margin-block: 0;
+    text-align: center;
+    font-size: 37px;
+    letter-spacing: normal;
+}
