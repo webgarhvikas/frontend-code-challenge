@@ -16,6 +16,8 @@
 .rvp-main .rv-products {
     margin-top: 50px;
     overflow: hidden;
+    padding-bottom: 30px;
+    position: relative;
 }
 .rv-products-box > img {
     max-width: 100%;
