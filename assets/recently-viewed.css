@@ -26,7 +26,8 @@
     overflow: hidden;
 }
 .rv-products-box .rv-products-box-info {
-    padding: 15px;
+    padding: 5px 15px 15px 15px;
+    text-align: center;
 }
 .rv-products-box .rv-products-box-info h3 {
     margin-top: 0;
