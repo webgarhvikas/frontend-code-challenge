@@ -2,33 +2,32 @@
 
 <section class="rvp-main page-width">
 
-        {% if section.settings.title != blank  %}
-             <h1 class="section-title">{{ section.settings.title }}</h1>
-        {% endif %}
-        
-       <span class="sub-title">{{ section.settings.sub_title }}</span>
+  {% if section.settings.title != blank %}
+    <h1 class="section-title">{{ section.settings.title }}</h1>
+  {% endif %}
 
-       <div class="rv-products">
-         
+  <span class="sub-title">{{ section.settings.sub_title }}</span>
 
+  <div class="swiper-container rv-products">
+    <div class="swiper-wrapper">
+      {% for product in section.settings.rv_products %}
+        <div class="swiper-slide">
+          <img src="{{ product.images.first | image_url }}" alt="{{ product.title }}">
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.description }}</p>
+          {% if product.selected_or_first_available_variant.image %}
+            <img src="{{ product.selected_or_first_available_variant.image | image_url }}" alt="">
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
 
-         {% for products in section.settings.rv_products %}
+    <!-- Progress bar (scrollbar) -->
+    <div class="swiper-scrollbar"></div>
+  </div>
 
-             {{ products.title  }}
-
-             {{ products.description  }}
-
-
-<img src="{{ products.images.first | image_url  }}">
-             {{ products.selected_or_first_available_variant.image  }}
-         
-         {% endfor %}
-         
-       </div>
-
-  
-  
 </section>
+
 
 
 
