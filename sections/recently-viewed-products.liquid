@@ -74,7 +74,7 @@
 
     // Render the list
     const wrapper = document.getElementById('recently-viewed-wrapper');
-    if (wrapper) {
+    if (wrapper && viewed != '') {
       viewed.forEach(product => {
         if (product.handle !== currentHandle) {
           const slide = `
