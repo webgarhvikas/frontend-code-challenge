@@ -47,16 +47,7 @@
 
 
 
-  const section = document.getElementById('recently-viewed-section');
 
-// Remove current product from the list
-const productsToShow = viewed.filter(p => p.handle !== currentHandle);
-
-// If no products to show, hide the section and stop
-if (productsToShow.length === 0 && section) {
-  section.style.display = 'none';
-  return;
-}
 
 
       document.addEventListener('DOMContentLoaded', function () {
