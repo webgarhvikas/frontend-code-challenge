@@ -79,5 +79,7 @@
 .rvp-main .rv-products .swiper-scrollbar.swiper-scrollbar-horizontal {
     height: 6px;
 }
-
+.rv-products .swiper-scrollbar-drag:hover {
+    background: #121212;
+}
 
