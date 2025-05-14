@@ -1,15 +1,14 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <section class="rvp-main page-width">
-
   {% if section.settings.title != blank %}
     <h1 class="section-title">{{ section.settings.title }}</h1>
   {% endif %}
-  
+
   {% if section.settings.sub_title != blank %}
-  <div class="sub-title">{{ section.settings.sub_title }}</div>
+    <div class="sub-title">{{ section.settings.sub_title }}</div>
   {% endif %}
 
   <div class="swiper-container rv-products">
@@ -33,6 +32,52 @@
     <div class="swiper-scrollbar"></div>
   </div>
 
+  <recently-viewed-products
+    section-id="{{ section.id }}"
+    products-count="{{ settings.products_count_recently | escape }}"
+    {% if request.page_type == 'product' %}
+      exclude-product-id="{{ product.id | escape }}"
+    {% endif %}
+    class="section {% unless blends_with_background %}section--flush{% endunless %}"
+  >
+    {%- if request.page_type == 'search' and search.performed and search.results_count > 0 -%}
+      <div class="section__color-wrapper">
+        <div class="container {% unless blends_with_background %}vertical-breather{% endunless %}">
+          {%- if settings.title_recently != blank or section.settings.subheading_recently != blank -%}
+            <header class="section__header">
+              <div class="text-container">
+                {%- if settings.subheading_recently != blank -%}
+                  <h2 class="heading heading--small">{{ settings.subheading_recently }}</h2>
+                {%- endif -%}
+
+                {%- if settings.title_recently != blank -%}
+                  <h2 class="main-heading-all-tabs">{{ settings.title_recently }}</h2>
+                {%- endif -%}
+              </div>
+            </header>
+          {%- endif -%}
+
+          <product-list
+            {% if settings.stagger_products_apparition %}
+              stagger-apparition
+            {% endif %}
+            class="product-list product-list--center"
+          >
+            {%- assign smallest_image_aspect_ratio = 0 -%}
+
+            <div class="scroller">
+              <div class="product-list__inner product-list__inner--scroller hide-scrollbar">
+                {%- for product in search.results -%}
+                  {{ product.title }}
+                {% endfor %}
+              </div>
+            </div>
+          </product-list>
+        </div>
+      </div>
+    {% else %}
+    {%- endif -%}
+  </recently-viewed-products>
 </section>
 
 <script>
@@ -58,57 +103,69 @@
       },
     });
   });
+
+
+
+        {%- if request.page_type == 'product' -%}
+      // We save the product ID in local storage to be eventually used for recently viewed section
+      try {
+        const items = JSON.parse(localStorage.getItem('theme:recently-viewed-products') || '[]');
+
+        // We check if the current product already exists, and if it does not, we add it at the start
+        if (!items.includes({{ product.id | json }})) {
+          items.unshift({{ product.id | json }});
+        }
+
+        localStorage.setItem('theme:recently-viewed-products', JSON.stringify(items.slice(0, 20)));
+      } catch (e) {
+        // Safari in private mode does not allow setting item, we silently fail
+      }
+    {%- endif -%}
 </script>
 
-
-
-
-
-
-
 {% schema %}
-  {
-    "name": "Recently Viewed Products",
-    "settings": [
-      {
-        "type": "text",
-        "id": "title",
-        "label": "Section Title"
-      },
-       {
-        "type": "text",
-        "id": "sub_title",
-        "label": "Section Sub Title"
-      },
-      {
-        "type": "header",
-        "content": "Recently Viewed"
-      },
-      {
-        "type": "product_list",
-        "id": "rv_products",
-        "label": "Recently Products"
-      },
-      {
-        "type": "text",
-        "id": "desktop_count",
-        "label": "Products on Desktop"
-      },
-      {
-        "type": "text",
-        "id": "iPad_count",
-        "label": "Products on iPad"
-      },
-      {
-        "type": "text",
-        "id": "mobile_count",
-        "label": "Products on Mobile"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Recently Viewed Products"
-      }
-    ]
-  }
+{
+  "name": "Recently Viewed Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title"
+    },
+     {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Section Sub Title"
+    },
+    {
+      "type": "header",
+      "content": "Recently Viewed"
+    },
+    {
+      "type": "product_list",
+      "id": "rv_products",
+      "label": "Recently Products"
+    },
+    {
+      "type": "text",
+      "id": "desktop_count",
+      "label": "Products on Desktop"
+    },
+    {
+      "type": "text",
+      "id": "iPad_count",
+      "label": "Products on iPad"
+    },
+    {
+      "type": "text",
+      "id": "mobile_count",
+      "label": "Products on Mobile"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recently Viewed Products"
+    }
+  ]
+}
 {% endschema %}
