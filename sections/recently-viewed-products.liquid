@@ -43,9 +43,6 @@
 
    
     var viewed = [];
-  //   if (localStorage.getItem('recently_viewed') !== null) {
-  //    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
-  // }
 try {
   const item = localStorage.getItem('recently_viewed');
   if (item) {
@@ -63,16 +60,6 @@ try {
 
     console.log('====viewed pp===',viewed.length)
 
-      // if (viewed.length < 0) {
-      
-      //   console.log("No recently viewed products.");
-      //     section.style.display = 'none';
-      //   return;
-      // }
-
-
-    
-    // Filter out current product
     viewed = viewed.filter(p => p.handle !== currentHandle);
 
     // Add current to beginning
