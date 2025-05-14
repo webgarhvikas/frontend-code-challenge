@@ -36,10 +36,10 @@
       url: {{ product.url | json }}
     };
     var recently_viewed = localStorage.getItem('recently_viewed');
-    var viewed = '';
-    if(recently_viewed != ''){
-       viewed = JSON.parse(recently_viewed) || [];
-    }
+    var viewed = [];
+   // if(viewed.length > 0){
+       viewed = JSON.parse(recently_viewed) ;
+   // }
 
      console.log('===',viewed.length);
     if(viewed.length == 0){
@@ -57,7 +57,7 @@
 
     
     // Filter out current product
-    if(viewed.length > 0){
+    //if(viewed.length > 0){
       viewed = viewed.filter(p => p.handle !== currentHandle);
   
       // Add current to beginning
@@ -65,7 +65,7 @@
   
       // Limit to max items
       viewed = viewed.slice(0, maxItems);
-    }
+   // }
 
    
 
