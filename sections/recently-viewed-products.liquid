@@ -38,15 +38,11 @@
 
     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
 
-
-    
-
-    // 🔒 Hide section immediately if nothing in localStorage
-    // if (viewed.length === 0) {
-    //   if (section) section.style.display = 'none';
-    //   return; // Exit early
-    // }
-
+if (viewed.length > 0) {
+  console.log("Recently viewed products found:", viewed);
+} else {
+  console.log("No recently viewed products.");
+}
     // Filter out current product
     viewed = viewed.filter(p => p.handle !== currentHandle);
 
