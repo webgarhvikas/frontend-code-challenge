@@ -57,14 +57,15 @@
 
     
     // Filter out current product
-    viewed = viewed.filter(p => p.handle !== currentHandle);
-
-    // Add current to beginning
-    viewed.unshift(productData);
-
-    // Limit to max items
-    viewed = viewed.slice(0, maxItems);
-
+    if(viewed != ''){
+      viewed = viewed.filter(p => p.handle !== currentHandle);
+  
+      // Add current to beginning
+      viewed.unshift(productData);
+  
+      // Limit to max items
+      viewed = viewed.slice(0, maxItems);
+    }
 
    
 
