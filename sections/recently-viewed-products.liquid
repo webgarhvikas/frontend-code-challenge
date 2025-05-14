@@ -35,9 +35,11 @@
       price: {{ product.price | money_without_currency | json }},
       url: {{ product.url | json }}
     };
-
-    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
-
+    var recently_viewed = localStorage.getItem('recently_viewed');
+    var viewed = '';
+    if(recently_viewed != ''){
+       viewed = JSON.parse(recently_viewed) || [];
+    }
 
      console.log(viewed);
     if(viewed === ''){
