@@ -50,7 +50,19 @@
 .rv-products-box .rv-products-box-info .rv-main-price {
     margin-top: 10px;
 }
-
+.rv-products-box .rv-products-box-info button {
+    display: block;
+    background: #121212;
+    font-size: 14px;
+    text-align: center;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    width: 100%;
+    letter-spacing: normal;
+    text-transform: uppercase;
+}
 
 
 
