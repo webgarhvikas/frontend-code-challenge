@@ -22,41 +22,11 @@
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    new Swiper(".swiper-container", {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      loop: false,
-      scrollbar: {
-        el: ".swiper-scrollbar",
-        draggable: true,
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: {{ section.settings.mobile_count }},
-        },
-        1024: {
-          slidesPerView: {{ section.settings.iPad_count }},
-        },
-        1366: {
-          slidesPerView: {{ section.settings.desktop_count }},
-        },
-      },
-    });
-  });
-
-
-
-
-
-
-      document.addEventListener('DOMContentLoaded', function () {
-
-
-
-        const section = document.querySelector('.rvp-main');
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.rvp-main');
     const maxItems = 10;
     const currentHandle = '{{ product.handle }}';
+
     const productData = {
       handle: {{ product.handle | json }},
       title: {{ product.title | json }},
@@ -66,40 +36,27 @@
       url: {{ product.url | json }}
     };
 
-
-
-        // console.log(productData);
-
-        
-
-
-        // return false;
-
     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
 
+    // 🔒 Hide section immediately if nothing in localStorage
+    if (viewed.length === 0) {
+      if (section) section.style.display = 'none';
+      return; // Exit early
+    }
 
-         // If no products in localStorage at all, hide the section and stop
-  // if (viewed.length === 0 ) {
-
-
-  //   console.log('true');
-  //   section.style.display = 'none';
-  //   return;
-  // }
-
-    // Remove current if it exists
+    // Filter out current product
     viewed = viewed.filter(p => p.handle !== currentHandle);
 
     // Add current to beginning
     viewed.unshift(productData);
 
-    // Limit number of items
+    // Limit to max items
     viewed = viewed.slice(0, maxItems);
 
-    // Store updated list
+    // Update localStorage
     localStorage.setItem('recently_viewed', JSON.stringify(viewed));
 
-    // Render
+    // Render the list
     const wrapper = document.getElementById('recently-viewed-wrapper');
     if (wrapper) {
       viewed.forEach(product => {
@@ -123,27 +80,27 @@
         }
       });
 
-      // Initialize Swiper (if not already initialized)
-       new Swiper(".swiper-container", {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      loop: false,
-      scrollbar: {
-        el: ".swiper-scrollbar",
-        draggable: true,
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: {{ section.settings.mobile_count }},
+      // Initialize Swiper
+      new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        loop: false,
+        scrollbar: {
+          el: ".swiper-scrollbar",
+          draggable: true,
         },
-        1024: {
-          slidesPerView: {{ section.settings.iPad_count }},
+        breakpoints: {
+          640: {
+            slidesPerView: {{ section.settings.mobile_count }},
+          },
+          1024: {
+            slidesPerView: {{ section.settings.iPad_count }},
+          },
+          1366: {
+            slidesPerView: {{ section.settings.desktop_count }},
+          },
         },
-        1366: {
-          slidesPerView: {{ section.settings.desktop_count }},
-        },
-      },
-    });
+      });
     }
   });
 </script>
