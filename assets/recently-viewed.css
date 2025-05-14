@@ -20,7 +20,11 @@
 .rv-products-box > img {
     max-width: 100%;
 }
-
+.rv-products-box {
+    background: #f9f9f9;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
 
 
