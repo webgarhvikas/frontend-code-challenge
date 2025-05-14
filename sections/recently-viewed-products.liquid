@@ -35,17 +35,8 @@
       price: {{ product.price | money_without_currency | json }},
       url: {{ product.url | json }}
     };
-    var recently_viewed = localStorage.getItem('recently_viewed');
-    var viewed = [];
-   // if(viewed.length > 0){
-       viewed = JSON.parse(recently_viewed) ;
-   // }
 
-     console.log('===',viewed);
-    if(viewed.length == 0){
-      console.log("No recently viewed products.");
-      section.style.display = 'none';
-    }
+    let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
 
       // if (viewed.length < 0) {
       
@@ -57,24 +48,23 @@
 
     
     // Filter out current product
-    //if(viewed.length > 0){
-      viewed = viewed.filter(p => p.handle !== currentHandle);
-  
-      // Add current to beginning
-      viewed.unshift(productData);
-  
-      // Limit to max items
-      viewed = viewed.slice(0, maxItems);
-   // }
+    viewed = viewed.filter(p => p.handle !== currentHandle);
 
-   
+    // Add current to beginning
+    viewed.unshift(productData);
+
+    // Limit to max items
+    viewed = viewed.slice(0, maxItems);
+
+
+    console.log(viewed);
 
     // Update localStorage
     localStorage.setItem('recently_viewed', JSON.stringify(viewed));
 
     // Render the list
     const wrapper = document.getElementById('recently-viewed-wrapper');
-    if (wrapper && viewed.length > 0) {
+    if (wrapper) {
       viewed.forEach(product => {
         if (product.handle !== currentHandle) {
           const slide = `
@@ -98,7 +88,7 @@
 
       // Initialize Swiper
       new Swiper(".swiper-container", {
-        // slidesPerView: 1,
+        slidesPerView: 1,
         spaceBetween: 10,
         loop: false,
         scrollbar: {
@@ -106,7 +96,7 @@
           draggable: true,
         },
         breakpoints: {
-          320: {
+          640: {
             slidesPerView: {{ section.settings.mobile_count }},
           },
           1024: {
