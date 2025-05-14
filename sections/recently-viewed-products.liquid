@@ -73,7 +73,7 @@
       document.addEventListener('DOMContentLoaded', function () {
     const maxItems = 10;
     const currentHandle = '{{ product.handle }}';
-  const currentProduct = {
+    const productData = {
       handle: {{ product.handle | json }},
       title: {{ product.title | json }},
       image: {{ product.featured_image | image_url: 'medium' | json }},
