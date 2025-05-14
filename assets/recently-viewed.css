@@ -29,12 +29,13 @@
     padding: 5px 15px 15px 15px;
     text-align: center;
 }
-.rv-products-box .rv-products-box-info h3 {
+.rv-products-box .rv-products-box-info h3, .rv-products-box .rv-products-box-info .rv-main-price {
     margin-top: 0;
     margin-bottom: 10px;
     line-height: normal;
     font-size: 17px;
     letter-spacing: normal;
+    color: #000;
 }
 .rv-products-box-info .product-description, .rv-products-box-info .product-description p {
     display: -webkit-box;
