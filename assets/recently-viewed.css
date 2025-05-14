@@ -62,8 +62,14 @@
     width: 100%;
     letter-spacing: normal;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
 }
-
+.rv-products-box .rv-products-box-info button:hover {
+    background: #fff;
+    color: #121212;
+    box-shadow: inset 0 0 0 1px #121212;
+}
 
 
 
