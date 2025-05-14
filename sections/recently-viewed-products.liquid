@@ -38,6 +38,9 @@
 
     let viewed = JSON.parse(localStorage.getItem('recently_viewed')) || [];
 
+
+     console.log(viewed);
+
       // if (viewed.length < 0) {
       
       //   console.log("No recently viewed products.");
@@ -57,7 +60,7 @@
     viewed = viewed.slice(0, maxItems);
 
 
-    console.log(viewed);
+   
 
     // Update localStorage
     localStorage.setItem('recently_viewed', JSON.stringify(viewed));
